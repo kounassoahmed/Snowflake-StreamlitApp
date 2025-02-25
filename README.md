@@ -1,0 +1,35 @@
+-- Step 1: Create the database  
+CREATE DATABASE IF NOT EXISTS PRD_DWH_RUNNING;
+
+-- Step 2: Create a Specific Role (For the demo, we will use ACCOUNTADMIN)
+SELECT CURRENT_ROLE();--ACCOUNTADMIN 
+
+-- Step 3: Grant All Privileges on Existing and Future Schemas (Define what actions a role can perform on objects)
+GRANT ALL PRIVILEGES ON ALL SCHEMAS IN DATABASE PRD_DWH_RUNNING TO ROLE ACCOUNTADMIN;
+GRANT ALL PRIVILEGES ON FUTURE SCHEMAS IN DATABASE PRD_DWH_RUNNING TO ROLE ACCOUNTADMIN;
+
+-- Step x: Grant all privileges on existing and future tables  
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN DATABASE PRD_DWH_RUNNING TO ROLE ACCOUNTADMIN;
+GRANT ALL PRIVILEGES ON FUTURE TABLES IN DATABASE PRD_DWH_RUNNING TO ROLE ACCOUNTADMIN;
+
+-- Step 4: Create the Schema 
+CREATE SCHEMA IF NOT EXISTS PRD_DWH_RUNNING.ST_SCHEMA;
+
+-- Step 6: Create the Stage
+CREATE STAGE IF NOT EXISTS PRD_DWH_RUNNING.ST_SCHEMA.MY_ST_STAGE;
+
+-- Step X: Get the Root Location (Before this, you will need to load the file into the stage)
+LIST @MY_ST_STAGE;
+USE SCHEMA PRD_DWH_RUNNING.ST_SCHEMA;
+
+-- Step 7: Create the Streamlit App (Before this, you will need to load the file into the stage)
+
+CREATE OR REPLACE STREAMLIT XLSX_APP
+  ROOT_LOCATION = '@PRD_DWH_RUNNING.ST_SCHEMA.MY_ST_STAGE/streamlit'
+  MAIN_FILE = '/app.py'
+  QUERY_WAREHOUSE = COMPUTE_WH
+  COMMENT = 'STREAMLIT APP';
+
+SELECT*
+FROM PRD_DWH_RUNNING.STG.BERLIN_MARATHON;
