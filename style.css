@@ -1,0 +1,100 @@
+/* style.css */
+
+/* Custom Sidebar Styles */
+[data-testid=stSidebar] {
+    background-color: #ffffff;
+    border-right: 2px solid #d3d3d3;
+}
+
+/* Style for DataFrame */
+[data-testid="stDataFrame"] {
+    background-color: white !important;
+}
+
+/* Radio Button Styles */
+div[role="radiogroup"] {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+}
+
+input[type="radio"] + div {
+    background: #0F5299;
+    color: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="radio"]:checked + div {
+    background: rgba(230, 100, 7, 0.8);
+    color: #FFF;
+    border: 2px solid #E66407;
+    font-weight: bold;
+}
+
+input[type="radio"] + div:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+div[role="radiogroup"] label > div:first-child {
+    display: none;
+}
+
+/* Application Background and Text */
+[data-testid="stApp"] {
+    background: #ffff !important;
+    color: #000000 !important;
+}
+
+/* Improvements for hover behavior */
+.stRadio div label:hover {
+    background-color: #f0f0f0 !important;
+    border-radius: 15px;
+}
+
+/* Table Styling */
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    background-color: white;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: #f8f9fa;
+    z-index: 2;
+}
+
+td {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
+    table {
+        font-size: 12px;
+    }
+}
